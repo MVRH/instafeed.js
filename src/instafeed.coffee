@@ -42,6 +42,7 @@ class Instafeed
     if typeof @options.clientId isnt 'string'
       unless typeof @options.accessToken is 'string'
         throw new Error "Missing clientId or accessToken."
+
     if typeof @options.accessToken isnt 'string'
       unless typeof @options.clientId is 'string'
         throw new Error "Missing clientId or accessToken."
@@ -279,9 +280,9 @@ class Instafeed
         if typeof @options.userId isnt 'number'
           throw new Error "No user specified. Use the 'userId' option."
 
-        # make sure there is an access token
-        if typeof @options.accessToken isnt 'string'
-          throw new Error "No access token. Use the 'accessToken' option."
+        # NOTE: accessToken is not required if feed is public
+        #if typeof @options.accessToken isnt 'string'
+        #  throw new Error "No access token. Use the 'accessToken' option."
 
         endpoint = "users/#{@options.userId}/media/recent"
       # throw an error if any other option is given
@@ -387,5 +388,9 @@ class Instafeed
 
 
 # set up exports
-root = exports ? window
-root.Instafeed = Instafeed
+if typeof define != 'undefined'
+  define [], ->
+    return Instafeed
+else
+  root = exports ? window
+  root.Instafeed = Instafeed

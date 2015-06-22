@@ -226,9 +226,6 @@
           if (typeof this.options.userId !== 'number') {
             throw new Error("No user specified. Use the 'userId' option.");
           }
-          if (typeof this.options.accessToken !== 'string') {
-            throw new Error("No access token. Use the 'accessToken' option.");
-          }
           endpoint = "users/" + this.options.userId + "/media/recent";
           break;
         default:
@@ -324,8 +321,13 @@
 
   })();
 
-  root = typeof exports !== "undefined" && exports !== null ? exports : window;
-
-  root.Instafeed = Instafeed;
+  if (typeof define !== 'undefined') {
+    define([], function() {
+      return Instafeed;
+    });
+  } else {
+    root = typeof exports !== "undefined" && exports !== null ? exports : window;
+    root.Instafeed = Instafeed;
+  }
 
 }).call(this);
