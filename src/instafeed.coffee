@@ -229,7 +229,7 @@ class Instafeed
       if typeof @options.target == 'string'
         document.getElementById(@options.target).appendChild fragment
       else
-        target.appendChild fragment
+        @options.target.appendChild fragment
 
       # remove the injected script tag
       header = document.getElementsByTagName('head')[0]

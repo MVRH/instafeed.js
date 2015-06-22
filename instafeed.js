@@ -185,7 +185,7 @@
         if (typeof this.options.target === 'string') {
           document.getElementById(this.options.target).appendChild(fragment);
         } else {
-          target.appendChild(fragment);
+          this.options.target.appendChild(fragment);
         }
         header = document.getElementsByTagName('head')[0];
         header.removeChild(document.getElementById('instafeed-fetcher'));
